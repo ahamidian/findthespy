@@ -78,28 +78,31 @@
             android:gravity="center">
 
             <com.ramotion.fluidslider.FluidSlider
-                android:layout_width="0dp"
+                android:id="@+id/people_slider"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="50dp"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
             <com.bozapro.circularsliderrange.CircularSliderRange
                 android:id="@+id/circular_slider"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_weight="2"
-                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="3"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
                 range:arc_color="@color/colorAccent"
-                range:arc_dash_size="20dp"
-                range:border_color="#505090"
+                range:arc_dash_size="15dp"
+                range:border_color="#6168E6"
                 range:border_thickness="10dp"
                 range:end_angle="0"
                 range:start_angle="270"
                 range:start_thumb_color="#30AEFF"
                 range:start_thumb_size="0dp"
-                range:thumb_size="30dp"
-                />
+                range:thumb_size="30dp" />
         </LinearLayout>
 
 

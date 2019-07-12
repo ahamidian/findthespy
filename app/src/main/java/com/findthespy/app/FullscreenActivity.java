@@ -4,11 +4,17 @@ import android.annotation.SuppressLint;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.ramotion.fluidslider.FluidSlider;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 
 
 /**
@@ -96,8 +102,39 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-//        CircularSliderRange slider = findViewById(R.id.circular_slider);
-//        slider.
+        final FluidSlider peopleSlider = findViewById(R.id.people_slider);
+
+        int max = 10;
+        final int min = 3;
+        final int total = max - min;
+
+        peopleSlider.setPositionListener(new Function1<Float, Unit>() {
+            @Override
+            public Unit invoke(Float pos) {
+                peopleSlider.setBubbleText(String.valueOf(Math.round(min + (total  * pos))));
+                return Unit.INSTANCE;
+            }
+        });
+        peopleSlider.setPosition(0.3f);
+        peopleSlider.setTextSize(40);
+        peopleSlider.setStartText(String.valueOf(min));
+        peopleSlider.setEndText(String.valueOf(max));
+
+//        peopleSlider.setBeginTrackingListener(new Function0<Unit>() {
+//            @Override
+//            public Unit invoke() {
+//                Log.d("D", "setBeginTrackingListener");
+//                return Unit.INSTANCE;
+//            }
+//        });
+//
+//        peopleSlider.setEndTrackingListener(new Function0<Unit>() {
+//            @Override
+//            public Unit invoke() {
+//                Log.d("D", "setEndTrackingListener");
+//                return Unit.INSTANCE;
+//            }
+//        });
 
 
 //        // Set up the user interaction to manually show or hide the system UI.
