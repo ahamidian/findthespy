@@ -18,18 +18,6 @@ import kotlin.jvm.functions.Function1;
  */
 public class FullscreenActivity extends AppCompatActivity {
     /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
