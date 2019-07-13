@@ -7,4 +7,7 @@
     <string name="exit">Exit</string>
     <string name="instructions">Instructions</string>
     <string name="locationsList">Locations List</string>
+    <string name="exitDialogMessage">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

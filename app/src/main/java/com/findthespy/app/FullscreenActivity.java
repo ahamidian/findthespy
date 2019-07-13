@@ -1,19 +1,15 @@
 package com.findthespy.app;
 
 import android.annotation.SuppressLint;
-
+import android.app.Application;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-
+import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.ramotion.fluidslider.FluidSlider;
-
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
 
@@ -102,6 +98,24 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
+        initializePeopleSlider();
+        initializeExitButton();
+
+        // Set up the user interaction to manually show or hide the system UI.
+        mContentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hide();
+            }
+        });
+
+        // Upon interacting with UI controls, delay any scheduled hide()
+        // operations to prevent the jarring behavior of controls going away
+        // while interacting with the UI.
+//        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    private void initializePeopleSlider() {
         final FluidSlider peopleSlider = findViewById(R.id.people_slider);
 
         int max = 10;
@@ -120,6 +134,7 @@ public class FullscreenActivity extends AppCompatActivity {
         peopleSlider.setStartText(String.valueOf(min));
         peopleSlider.setEndText(String.valueOf(max));
 
+
 //        peopleSlider.setBeginTrackingListener(new Function0<Unit>() {
 //            @Override
 //            public Unit invoke() {
@@ -135,36 +150,24 @@ public class FullscreenActivity extends AppCompatActivity {
 //                return Unit.INSTANCE;
 //            }
 //        });
+    }
 
-
-//        // Set up the user interaction to manually show or hide the system UI.
-//        mContentView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                toggle();
-//            }
-//        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-//        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    private void initializeExitButton() {
+        Button exitButton = findViewById(R.id.exitButton);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExitDialog exitDialog = new ExitDialog();
+                exitDialog.show(getSupportFragmentManager(), "dialog");
+                hide();
+            }
+        });
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
 
-        delayedHide(100);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
         delayedHide(100);
     }
 
