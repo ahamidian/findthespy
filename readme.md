@@ -2,4 +2,4 @@
 
 
 ## Acknowledgements
-*    Launcher icon designed by [freepik](freepik.com)
+*    Launcher icon designed by [freepik](https://freepik.com)
