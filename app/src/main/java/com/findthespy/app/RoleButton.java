@@ -83,9 +83,6 @@ public class RoleButton extends RelativeLayout {
         final ImageView swipeButton = new ImageView(context);
         this.slidingButton = swipeButton;
 
-        disabledDrawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_launcher_background);
-        enabledDrawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_launcher_foreground);
-
         slidingButton.setImageDrawable(disabledDrawable);
         slidingButton.setPadding(40, 40, 40, 40);
 
