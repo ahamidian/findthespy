@@ -3,4 +3,13 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="start">START</string>
+    <string name="exit">Exit</string>
+    <string name="instructions">Instructions</string>
+    <string name="locationsList">Locations List</string>
+    <string name="exitDialogMessage">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="_3_min">3 MIN</string>
+    <string name="number_of_people">Number of people</string>
 </resources>
