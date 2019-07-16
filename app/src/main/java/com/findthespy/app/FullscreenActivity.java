@@ -205,7 +205,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 b.putInt("time", time);
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
             }
         });
     }
