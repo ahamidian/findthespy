@@ -1,6 +1,7 @@
 package com.findthespy.app;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -197,7 +198,13 @@ public class FullscreenActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(FullscreenActivity.this, StartGameActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("numberOfPeople", numberOfPeople);
+                b.putInt("time", time);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
             }
         });
     }
