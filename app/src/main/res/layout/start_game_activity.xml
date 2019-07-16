@@ -8,26 +8,30 @@
     android:orientation="vertical"
     tools:context=".StartGameActivity"
     android:visibility="visible"
-    android:background="@color/colorPrimary">
+    android:background="#000000"
+    android:paddingTop="100dp">
 
-    <com.findthespy.app.RoleButton
-        android:id="@+id/role_btn"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
+    <TextView
+        android:id="@+id/role_index_txt"
+        android:layout_width="wrap_content"
+        android:background="@drawable/shape_rounded"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/role_txt"
         android:layout_width="wrap_content"
-        android:background="@color/cardview_dark_background"
         android:layout_gravity="center"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="10dp"
+        android:textSize="28sp"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/show_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_shadow_end_color"
-        android:layout_gravity="center"
-        android:text="@android:"/>
+        android:background="@color/colorAccent"
+        android:layout_gravity="center" />
 </LinearLayout>
