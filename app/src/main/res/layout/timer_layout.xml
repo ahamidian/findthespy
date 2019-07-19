@@ -29,7 +29,7 @@
         android:layout_marginTop="110dp"
         android:text="@string/time_init_text"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/colorBlue"
+        android:textColor="@color/colorAccent"
         android:textSize="40sp" />
 
     <Button

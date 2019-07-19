@@ -28,6 +28,7 @@ public class StartGameActivity extends FullscreenActivity {
     private int answerIndex;
     private int playerIndex = 1;
     private int time;
+    private String categoryName;
 
 
     @Override
@@ -40,17 +41,17 @@ public class StartGameActivity extends FullscreenActivity {
         Random randomGen = new Random();
 
 
-//        final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
-        final String categoryName = "category#" + "Locations";
+        Intent intent = getIntent();
+        categoryName = intent.getExtras().getString("categoryName");
+//        final String categoryName = "category#" + "Locations";
         final TinyDB db = new TinyDB(getApplicationContext());
         ArrayList<String> items = db.getListString(categoryName);
         answerIndex = randomGen.nextInt(items.size());
         answer = items.get(answerIndex);
 
-        Intent intent = getIntent();
         roleNum = intent.getExtras().getInt("numberOfPeople");
         time = intent.getExtras().getInt("time");
-        spyIndex = randomGen.nextInt(roleNum);
+        spyIndex = randomGen.nextInt(roleNum) + 1;
 
         this.roleTextView = (TextView) findViewById(R.id.role_txt);
         this.roleTextView.setText("سلام");
@@ -59,37 +60,37 @@ public class StartGameActivity extends FullscreenActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        this.roleTextView.setTextColor(Color.WHITE);
         this.roleTextView.setPadding(35, 35, 35, 35);
-        this.roleTextView.setTextSize(18);
 
         seeRoleButton = findViewById(R.id.show_role);
-        seeRoleButton.setText("دیدن نقش");
+        seeRoleButton.setText(getString(R.string.view_role));
         seeRoleButton.setOnClickListener(getRoleButtonOnClickListener);
 
         this.roleIndexTextView = findViewById(R.id.role_index_txt);
-        this.roleIndexTextView.setText("بازیکن 1");
+        this.roleIndexTextView.setText(getString(R.string.player) + "1");
 
     }
 
     private View.OnClickListener gotItButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            playerIndex += 1;
             if (playerIndex >= roleNum) {
                 Intent intent = new Intent(StartGameActivity.this, TimerActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("time", time);
                 b.putInt("spyName", spyIndex);
                 b.putString("answer", answer);
+                b.putString("categoryName", categoryName);
                 intent.putExtras(b);
                 startActivity(intent);
                 finish();
+            } else {
+                playerIndex += 1;
+                seeRoleButton.setText(getString(R.string.view_role));
+                roleIndexTextView.setText(getString(R.string.player) + (playerIndex));
+                seeRoleButton.setOnClickListener(getRoleButtonOnClickListener);
+                roleTextView.setText(" ");
             }
-            seeRoleButton.setText("دیدن نقش");
-            roleIndexTextView.setText("بازیکن " + (playerIndex));
-            seeRoleButton.setOnClickListener(getRoleButtonOnClickListener);
-            roleTextView.setText(" ");
         }
 
     };
@@ -98,15 +99,15 @@ public class StartGameActivity extends FullscreenActivity {
         @Override
         public void onClick(View view) {
             if (playerIndex != spyIndex)
-                roleTextView.setText("جواب: " + answer);
+                roleTextView.setText(getString(R.string.answer) + answer);
             else
-                roleTextView.setText("آشغال Spy");
+                roleTextView.setText(getString(R.string.spySimple));
             if (playerIndex < roleNum) {
-                seeRoleButton.setText("فهمیدم");
-                seeRoleButton.setOnClickListener(gotItButtonOnClickListener);
+                seeRoleButton.setText(getString(R.string.got_it));
             } else {
-                seeRoleButton.setText("شروع بازی");
+                seeRoleButton.setText(getString(R.string.start));
             }
+            seeRoleButton.setOnClickListener(gotItButtonOnClickListener);
         }
     };
 

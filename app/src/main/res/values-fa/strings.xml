@@ -18,10 +18,13 @@
     <string name="message_minutes">لطفا دقیقه را وارد کنید...</string>
     <string name="manual_finish_game">پایان بازی</string>
     <string name="spy">Spy:</string>
-    <string name="player">Player </string>
+    <string name="spySimple">Spy</string>
+    <string name="player">بازیکن </string>
     <string name="view_item_list">دیدن لیست گزینه ها</string>
     <string name="view_answer">دیدن جواب</string>
     <string name="answer">پاسخ: </string>
     <string name="backToMainMenu">صفحه اصلی</string>
+    <string name="view_role">دیدن نقش</string>
+    <string name="got_it">فهمیدم</string>
 
 </resources>

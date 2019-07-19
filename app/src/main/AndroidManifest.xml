@@ -62,6 +62,13 @@
 
             android:screenOrientation="landscape">
         </activity>
+        <activity
+            android:name=".ShowingItemsActivity"
+            android:theme="@style/FullscreenTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

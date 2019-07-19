@@ -22,5 +22,8 @@
     <string name="view_answer">View Answer</string>
     <string name="answer">answer: </string>
     <string name="backToMainMenu">Main Menu</string>
+    <string name="view_role">View Role</string>
+    <string name="got_it">Got It</string>
+    <string name="spySimple">Spy</string>
 
 </resources>
