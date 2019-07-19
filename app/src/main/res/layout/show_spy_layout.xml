@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/spy_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spy_layout"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/spy"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="110dp"
             android:layout_marginStart="150dp"
+            android:layout_marginTop="110dp"
             android:text="@string/spy"
             android:textColor="@color/colorAccent"
             android:textSize="40sp" />
@@ -33,15 +33,43 @@
             android:textSize="40sp" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/view_item_list"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/view_item_list"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/view_item_list" />
+
+        <Button
+            android:id="@+id/view_answer"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toStartOf="@+id/view_item_list"
+            android:text="@string/view_answer" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/answer"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/spy_layout"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="300dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/view_item_list"/>
+        android:gravity="start"
+        android:rotation="-90"
+        android:text="adsf"
+        android:textSize="30sp"
+        android:textColor="@color/colorBlue"
+        android:visibility="invisible" />
 
-</RelativeLayout>
+</LinearLayout>

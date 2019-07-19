@@ -20,5 +20,6 @@
     <string name="spy">Spy:</string>
     <string name="player">Player </string>
     <string name="view_item_list">دیدن لیست گزینه ها</string>
+    <string name="view_answer">دیدن جواب</string>
 
 </resources>
