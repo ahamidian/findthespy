@@ -40,6 +40,13 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
                 mClickListener.onItemClicked(mValues.get(position));
             }
         });
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mClickListener.onItemLongClicked(mValues.get(position));
+                return false;
+            }
+        });
     }
 
     @Override
