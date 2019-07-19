@@ -21,5 +21,7 @@
     <string name="player">Player </string>
     <string name="view_item_list">دیدن لیست گزینه ها</string>
     <string name="view_answer">دیدن جواب</string>
+    <string name="answer">پاسخ: </string>
+    <string name="backToMainMenu">صفحه اصلی</string>
 
 </resources>

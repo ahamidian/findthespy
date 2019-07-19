@@ -41,7 +41,7 @@ public class StartGameActivity extends FullscreenActivity {
 
 
 //        final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
-        final String categoryName = "category#" + "home";
+        final String categoryName = "category#" + "Locations";
         final TinyDB db = new TinyDB(getApplicationContext());
         ArrayList<String> items = db.getListString(categoryName);
         answerIndex = randomGen.nextInt(items.size());
@@ -81,6 +81,7 @@ public class StartGameActivity extends FullscreenActivity {
                 Bundle b = new Bundle();
                 b.putInt("time", time);
                 b.putInt("spyName", spyIndex);
+                b.putString("answer", answer);
                 intent.putExtras(b);
                 startActivity(intent);
                 finish();

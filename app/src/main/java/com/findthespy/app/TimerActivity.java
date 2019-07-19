@@ -19,6 +19,7 @@ public class TimerActivity extends FullscreenActivity{
     private int time;
     private long timeCountInMilliSeconds = 1 * 60000;
     private int spyId;
+    private String answer;
 
     private enum TimerStatus {
         STARTED,
@@ -44,6 +45,7 @@ public class TimerActivity extends FullscreenActivity{
         Intent intent = getIntent();
         time = intent.getExtras().getInt("time");
         spyId = intent.getExtras().getInt("spyName");
+        answer = intent.getExtras().getString("answer");
 
         timeCountInMilliSeconds = time * 1000 * 60;
 
@@ -64,6 +66,7 @@ public class TimerActivity extends FullscreenActivity{
                 Intent intent = new Intent(TimerActivity.this, ShowSpyActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("spyName", spyId);
+                b.putString("answer", answer);
                 intent.putExtras(b);
                 startActivity(intent);
                 finish();

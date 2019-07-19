@@ -15,6 +15,7 @@ public class ShowSpyActivity extends FullscreenActivity {
 
     private int spyId;
     private Button showAnswerButton;
+    private String answer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class ShowSpyActivity extends FullscreenActivity {
 
         Intent intent = getIntent();
         spyId = intent.getExtras().getInt("spyName");
+        answer = intent.getExtras().getString("answer");
 
         TextView spyIdText = findViewById(R.id.spy_name);
         spyIdText.setText(getString(R.string.player) + spyId);
@@ -36,8 +38,23 @@ public class ShowSpyActivity extends FullscreenActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView answer = findViewById(R.id.answer);
-                answer.setVisibility(View.VISIBLE);
+                TextView answerTV = findViewById(R.id.answer);
+                answerTV.setText(answer);
+                answerTV.setVisibility(View.VISIBLE);
+
+                TextView answerTxtTV = findViewById(R.id.answerTxt);
+                answerTxtTV.setVisibility(View.VISIBLE);
+
+                Button backToMainMenu = findViewById(R.id.backToMainMenu);
+                backToMainMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(ShowSpyActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                backToMainMenu.setVisibility(View.VISIBLE);
             }
         };
     }
