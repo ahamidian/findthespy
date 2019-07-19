@@ -33,7 +33,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/manualFinishButton"
+        android:id="@+id/view_item_list"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@+id/spy_layout"
@@ -42,5 +42,4 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:text="@string/manual_finish_game" />
-
 </RelativeLayout>

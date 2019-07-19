@@ -41,10 +41,11 @@ public class StartGameActivity extends FullscreenActivity {
 
 
 //        final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
-//        final TinyDB db = new TinyDB(getApplicationContext());
-//        ArrayList<String> items = db.getListString(categoryName);
-//        answerIndex = randomGen.nextInt(items.size());
-//        answer = items.get(answerIndex);
+        final String categoryName = "category#" + "home";
+        final TinyDB db = new TinyDB(getApplicationContext());
+        ArrayList<String> items = db.getListString(categoryName);
+        answerIndex = randomGen.nextInt(items.size());
+        answer = items.get(answerIndex);
 
         Intent intent = getIntent();
         roleNum = intent.getExtras().getInt("numberOfPeople");

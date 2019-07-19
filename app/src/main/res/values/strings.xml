@@ -18,4 +18,6 @@
     <string name="manual_finish_game">Finish the game</string>
     <string name="spy">Spy:</string>
     <string name="player">Player </string>
+    <string name="view_item_list">View Item List</string>
+
 </resources>
