@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="time_init_text">00:01:00</string>
+    <string name="app_name">Find the Spy</string>
+
+    <string name="dummy_button">دکمه الکی</string>
+    <string name="dummy_content">الکی/کامنت</string>
+    <string name="start">شروع</string>
+    <string name="exit">پایان</string>
+    <string name="instructions">قوانین</string>
+    <string name="locationsList">لیست مکان ها</string>
+    <string name="exitDialogMessage">به خروج از بازی اطمینان دارید?</string>
+    <string name="yes">بله</string>
+    <string name="no">نه</string>
+    <string name="_3_min">3 دقیقه</string>
+    <string name="number_of_people">تعداد بازیکنان</string>
+    <string name="hint_minute">دقیقه</string>
+    <string name="message_minutes">لطفا دقیقه را وارد کنید...</string>
+    <string name="manual_finish_game">پایان بازی</string>
+</resources>

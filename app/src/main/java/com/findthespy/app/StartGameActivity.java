@@ -25,6 +25,7 @@ public class StartGameActivity extends Activity {
     private int roleNum;
     private int spyIndex;
     private int playerIndex = 1;
+    private int time;
 
 
     @Override
@@ -36,6 +37,7 @@ public class StartGameActivity extends Activity {
 
         Intent intent = getIntent();
         roleNum = intent.getExtras().getInt("numberOfPeople");
+        time = intent.getExtras().getInt("time");
         Random randomGen = new Random();
         spyIndex = randomGen.nextInt(roleNum);
 
@@ -62,13 +64,21 @@ public class StartGameActivity extends Activity {
     private View.OnClickListener gotItButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (playerIndex < roleNum)
-                playerIndex += 1;
+            playerIndex += 1;
+            if (playerIndex >= roleNum) {
+                Intent intent = new Intent(StartGameActivity.this, TimerActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("time", time);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
             seeRoleButton.setText("دیدن نقش");
-            roleIndexTextView.setText("بازیکن: " + (playerIndex));
-            roleTextView.setText(" ");
+            roleIndexTextView.setText("بازیکن " + (playerIndex));
             seeRoleButton.setOnClickListener(getRoleButtonOnClickListener);
+            roleTextView.setText(" ");
         }
+
     };
 
     private View.OnClickListener getRoleButtonOnClickListener = new View.OnClickListener() {
@@ -81,9 +91,8 @@ public class StartGameActivity extends Activity {
             if (playerIndex < roleNum) {
                 seeRoleButton.setText("فهمیدم");
                 seeRoleButton.setOnClickListener(gotItButtonOnClickListener);
-            }
-            else{
-
+            } else {
+                seeRoleButton.setText("شروع بازی");
             }
         }
     };
