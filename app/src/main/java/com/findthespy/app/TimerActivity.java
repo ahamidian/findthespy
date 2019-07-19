@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class TimerActivity extends Activity{
     private int time;
     private long timeCountInMilliSeconds = 1 * 60000;
+    private int spyId;
 
     private enum TimerStatus {
         STARTED,
@@ -28,6 +30,7 @@ public class TimerActivity extends Activity{
     private ProgressBar progressBarCircle;
     private TextView textViewTime;
     private CountDownTimer countDownTimer;
+    private Button finishButton;
 
 
     @Override
@@ -39,12 +42,32 @@ public class TimerActivity extends Activity{
         initViews();
         Intent intent = getIntent();
         time = intent.getExtras().getInt("time");
+        spyId = intent.getExtras().getInt("spyName");
+
         timeCountInMilliSeconds = time * 1000 * 60;
+
         ProgressBar CDT = findViewById(R.id.progressBarCircle);
         CDT.setMax(time * 60);
 
+        finishButton = findViewById(R.id.manualFinishButton);
+        finishButton.setOnClickListener(FinishClickListener());
+
         startCountDownTimer();
 
+    }
+
+    private View.OnClickListener FinishClickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TimerActivity.this, ShowSpyActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("spyName", spyId);
+                intent.putExtras(b);
+                startActivity(intent);
+                finish();
+            }
+        };
     }
 
     /**
@@ -74,17 +97,6 @@ public class TimerActivity extends Activity{
             @Override
             public void onFinish() {
 
-//                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-//                // call to initialize the progress bar values
-//                setProgressBarValues();
-//                // hiding the reset icon
-//                imageViewReset.setVisibility(View.GONE);
-//                // changing stop icon to start icon
-//                imageViewStartStop.setImageResource(R.drawable.icon_start);
-//                // making edit text editable
-//                editTextMinute.setEnabled(true);
-//                // changing the timer status to stopped
-//                timerStatus = TimerStatus.STOPPED;
             }
 
         }.start();

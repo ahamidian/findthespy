@@ -53,12 +53,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
 
             android:screenOrientation="landscape">
-            android:theme="@style/FullscreenTheme">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".ShowSpyActivity"
+            android:theme="@style/FullscreenTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

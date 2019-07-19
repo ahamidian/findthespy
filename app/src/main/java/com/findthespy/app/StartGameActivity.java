@@ -69,6 +69,7 @@ public class StartGameActivity extends Activity {
                 Intent intent = new Intent(StartGameActivity.this, TimerActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("time", time);
+                b.putInt("spyName", spyIndex);
                 intent.putExtras(b);
                 startActivity(intent);
                 finish();

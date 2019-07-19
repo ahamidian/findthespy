@@ -16,4 +16,6 @@
     <string name="message_minutes">Please Enter Minutes...</string>
     <string name="time_init_text">00:01:00</string>
     <string name="manual_finish_game">Finish the game</string>
+    <string name="spy">Spy:</string>
+    <string name="player">Player </string>
 </resources>

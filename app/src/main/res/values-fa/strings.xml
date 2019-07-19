@@ -17,4 +17,6 @@
     <string name="hint_minute">دقیقه</string>
     <string name="message_minutes">لطفا دقیقه را وارد کنید...</string>
     <string name="manual_finish_game">پایان بازی</string>
+    <string name="spy">Spy:</string>
+    <string name="player">Player </string>
 </resources>

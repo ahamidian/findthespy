@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spy_layout"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/spy"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="110dp"
+            android:text="@string/spy"
+            android:textColor="@color/colorAccent"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/spy_name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="110dp"
+            android:layout_toEndOf="@+id/spy"
+            android:text="@string/spy"
+            android:textColor="@color/peopleBarColor"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/manualFinishButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/spy_layout"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icon_start"
+        android:text="@string/manual_finish_game" />
+
+</RelativeLayout>
