@@ -40,7 +40,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/manual_finish_game"
-        android:src="@drawable/icon_start" />
+        android:text="@string/manual_finish_game" />
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:range="http://schemas.android.com/apk/res-auto"
-    android:background="#000000"
+    android:background="@color/colorBackground"
     tools:context=".FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -122,6 +122,11 @@
         </LinearLayout>
 
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:textSize="30sp"
+            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/start_button"
             android:layout_width="200dp"

@@ -51,13 +51,19 @@ public class CategoryActivity extends FullscreenActivity implements OnItemClickL
         findViewById(R.id.add_category).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                items.add(nameEditText.getText().toString());
-                db.putListString(categoryName, items);
-                nameEditText.setText("");
-                nameEditText.clearFocus();
-                closeKeyBoard();
-                mAdapter.notifyDataSetChanged();
+                String input = nameEditText.getText().toString();
+                if (items.contains(input)) {
+                    Toast.makeText(getApplicationContext(), "Item can not be duplicated!", Toast.LENGTH_LONG).show();
+                } else if (input.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Item can not be empty!", Toast.LENGTH_LONG).show();
+                } else {
+                    items.add(input);
+                    db.putListString(categoryName, items);
+                    nameEditText.setText("");
+                    nameEditText.clearFocus();
+                    closeKeyBoard();
+                    mAdapter.notifyDataSetChanged();
+                }
             }
         });
 

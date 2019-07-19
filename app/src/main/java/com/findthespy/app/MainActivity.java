@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bozapro.circularsliderrange.CircularSliderRange;
 import com.bozapro.circularsliderrange.ThumbEvent;
 import com.ramotion.fluidslider.FluidSlider;
+
+import java.util.ArrayList;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -27,17 +33,62 @@ public class MainActivity extends FullscreenActivity {
         setContentView(R.layout.activity_fullscreen);
 
         super.mContentView = findViewById(R.id.fullscreen_content);
-
+        createDefaultCategory();
         initializePeopleSlider();
         initializeTimeSlider();
         initializeExitButton();
         initializeInstructionsButton();
         initializeStartButton();
         initializeLocationsButton();
+        initializeCategoryChoose();
 
         setTime(3);
         setNumberOfPeople(5);
 
+    }
+
+    private void initializeCategoryChoose() {
+        TinyDB db = new TinyDB(getApplicationContext());
+        final ArrayList<String> categories = db.getListString("categories");
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                R.layout.spinner_dropdown_item,categories);
+
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),categories.get(position),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void createDefaultCategory() {
+        TinyDB db = new TinyDB(getApplicationContext());
+        ArrayList<String> categories = db.getListString("categories");
+        if(categories==null||categories.isEmpty()){
+            categories=new ArrayList<>();
+            categories.add("Locations");
+            ArrayList<String> items=new ArrayList<>();
+            items.add("Airplane");
+            items.add("Bank");
+            items.add("Beach");
+            items.add("Hospital");
+            items.add("Hotel");
+            items.add("Movie Studio");
+            items.add("School");
+            items.add("Supermarket");
+            items.add("Theater");
+            items.add("University");
+            db.putListString("categories",categories);
+            db.putListString("category#Locations",items);
+        }
     }
 
     private void initializeTimeSlider() {
@@ -46,10 +97,10 @@ public class MainActivity extends FullscreenActivity {
         final int min = 0;
         final int total = max - min;
 
-        final double oneMin = 360 / (double)total;
+        final double oneMin = 360 / (double) total;
 
         timeSlider.setStartAngle(270);
-        timeSlider.setEndAngle(270 + 3 * 360 / (double)total);
+        timeSlider.setEndAngle(270 + 3 * 360 / (double) total);
 
 //        peopleSlider.setPosition(0.3f);
 //        peopleSlider.setTextSize(40);
@@ -58,6 +109,7 @@ public class MainActivity extends FullscreenActivity {
 
         timeSlider.setOnSliderRangeMovedListener(new CircularSliderRange.OnSliderRangeMovedListener() {
             String TAG = "TAG";
+
             @Override
             public void onStartSliderMoved(double pos) {
 //                Log.d(TAG, "onStartSliderMoved:" + pos);
@@ -69,7 +121,7 @@ public class MainActivity extends FullscreenActivity {
 
                 double position = pos;
 
-                if (position >= 270){
+                if (position >= 270) {
                     if (position > 270 + oneMin / 2) {
                         if (position < 270 + oneMin) {
                             timeSlider.setEndAngle(270 + oneMin);
@@ -77,8 +129,7 @@ public class MainActivity extends FullscreenActivity {
                             setTime(getRound(position));
                             return;
                         }
-                    }
-                    else {
+                    } else {
                         timeSlider.setEndAngle(269);
                         position = 90 + 269;
                         setTime(getRound(position));
@@ -86,10 +137,9 @@ public class MainActivity extends FullscreenActivity {
                     }
                 }
 
-                if (position > 270){
+                if (position > 270) {
                     position = position - 270;
-                }
-                else {
+                } else {
                     position = 90 + position;
                 }
 
@@ -97,7 +147,7 @@ public class MainActivity extends FullscreenActivity {
             }
 
             private int getRound(double position) {
-                return (int)Math.round(min + (total  * position / 360));
+                return (int) Math.round(min + (total * position / 360));
             }
 
             @Override
@@ -171,7 +221,7 @@ public class MainActivity extends FullscreenActivity {
         peopleSlider.setPositionListener(new Function1<Float, Unit>() {
             @Override
             public Unit invoke(Float pos) {
-                int numOfPeople = Math.round(min + (total  * pos));
+                int numOfPeople = Math.round(min + (total * pos));
                 setNumberOfPeople(numOfPeople);
                 peopleSlider.setBubbleText(String.valueOf(numberOfPeople));
 
