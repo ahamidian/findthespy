@@ -1,7 +1,9 @@
 package com.findthespy.app;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,19 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity implements OnItemClickListener {
+public class CategoryActivity extends FullscreenActivity implements OnItemClickListener {
 
     private RecyclerView recyclerView;
     private CategoryRecyclerViewAdapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
     private GridLayoutManager gridLayoutManager;
     private ArrayList<String> items = new ArrayList<>();
+    private InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        super.mContentView = findViewById(R.id.fullscreen_content);
+
         final EditText nameEditText = findViewById(R.id.category_name);
+        imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
         final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
 
@@ -49,11 +55,18 @@ public class CategoryActivity extends AppCompatActivity implements OnItemClickLi
                 items.add(nameEditText.getText().toString());
                 db.putListString(categoryName, items);
                 nameEditText.setText("");
+                nameEditText.clearFocus();
+                closeKeyBoard();
                 mAdapter.notifyDataSetChanged();
             }
         });
 
     }
+    private void closeKeyBoard() {
+        if (imm != null)
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+
 
     @Override
     public void onItemClicked(String category) {
