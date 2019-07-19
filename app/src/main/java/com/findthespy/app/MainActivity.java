@@ -25,6 +25,7 @@ public class MainActivity extends FullscreenActivity {
 
     private int numberOfPeople;
     private int time;
+    private String chosenCategory = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +51,16 @@ public class MainActivity extends FullscreenActivity {
     private void initializeCategoryChoose() {
         TinyDB db = new TinyDB(getApplicationContext());
         final ArrayList<String> categories = db.getListString("categories");
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                R.layout.spinner_dropdown_item,categories);
+                R.layout.spinner_dropdown_item, categories);
 
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),categories.get(position),Toast.LENGTH_LONG).show();
+                chosenCategory = categories.get(position);
             }
 
             @Override
@@ -69,13 +70,19 @@ public class MainActivity extends FullscreenActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initializeCategoryChoose();
+    }
+
     private void createDefaultCategory() {
         TinyDB db = new TinyDB(getApplicationContext());
         ArrayList<String> categories = db.getListString("categories");
-        if(categories==null||categories.isEmpty()){
-            categories=new ArrayList<>();
+        if (categories == null || categories.isEmpty()) {
+            categories = new ArrayList<>();
             categories.add("Locations");
-            ArrayList<String> items=new ArrayList<>();
+            ArrayList<String> items = new ArrayList<>();
             items.add("Airplane");
             items.add("Bank");
             items.add("Beach");
@@ -86,9 +93,10 @@ public class MainActivity extends FullscreenActivity {
             items.add("Supermarket");
             items.add("Theater");
             items.add("University");
-            db.putListString("categories",categories);
-            db.putListString("category#Locations",items);
+            db.putListString("categories", categories);
+            db.putListString("category#Locations", items);
         }
+        chosenCategory = categories.get(0);
     }
 
     private void initializeTimeSlider() {
@@ -194,6 +202,7 @@ public class MainActivity extends FullscreenActivity {
                 Bundle b = new Bundle();
                 b.putInt("numberOfPeople", numberOfPeople);
                 b.putInt("time", time);
+                b.putString("categoryName", "category#" + chosenCategory);
                 intent.putExtras(b);
                 startActivity(intent);
             }
