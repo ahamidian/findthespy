@@ -9,15 +9,15 @@ import androidx.annotation.Nullable;
 
 import org.w3c.dom.Text;
 
-public class ShowSpyActivity extends Activity {
+public class ShowSpyActivity extends FullscreenActivity {
 
     private int spyId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.show_spy_layout);
+        super.mContentView = findViewById(R.id.fullscreen_content);
 
         Intent intent = getIntent();
         spyId = intent.getExtras().getInt("spyName");

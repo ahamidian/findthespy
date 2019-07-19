@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
-public class TimerActivity extends Activity{
+public class TimerActivity extends FullscreenActivity{
     private int time;
     private long timeCountInMilliSeconds = 1 * 60000;
     private int spyId;
@@ -37,6 +37,7 @@ public class TimerActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer_layout);
+        super.mContentView = findViewById(R.id.fullscreen_content);
 
         // method call to initialize the views
         initViews();

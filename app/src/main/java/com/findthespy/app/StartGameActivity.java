@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-public class StartGameActivity extends Activity {
+public class StartGameActivity extends FullscreenActivity {
 
     TextView roleTextView;
     TextView roleIndexTextView;
@@ -24,6 +25,7 @@ public class StartGameActivity extends Activity {
     private String answer = "جواب";
     private int roleNum;
     private int spyIndex;
+    private int answerIndex;
     private int playerIndex = 1;
     private int time;
 
@@ -33,12 +35,20 @@ public class StartGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         int startGameActivityIndex = R.layout.start_game_activity;
         setContentView(startGameActivityIndex);
+        super.mContentView = findViewById(R.id.fullscreen_content);
 
+        Random randomGen = new Random();
+
+
+//        final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
+//        final TinyDB db = new TinyDB(getApplicationContext());
+//        ArrayList<String> items = db.getListString(categoryName);
+//        answerIndex = randomGen.nextInt(items.size());
+//        answer = items.get(answerIndex);
 
         Intent intent = getIntent();
         roleNum = intent.getExtras().getInt("numberOfPeople");
         time = intent.getExtras().getInt("time");
-        Random randomGen = new Random();
         spyIndex = randomGen.nextInt(roleNum);
 
         this.roleTextView = (TextView) findViewById(R.id.role_txt);

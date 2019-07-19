@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
@@ -8,25 +9,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spy_layout"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        >
 
         <TextView
             android:id="@+id/spy"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
             android:layout_marginTop="110dp"
+            android:layout_marginStart="150dp"
             android:text="@string/spy"
             android:textColor="@color/colorAccent"
             android:textSize="40sp" />
 
         <TextView
             android:id="@+id/spy_name"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
             android:layout_marginTop="110dp"
             android:layout_toEndOf="@+id/spy"
             android:text="@string/spy"
