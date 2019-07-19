@@ -62,4 +62,9 @@ public class ShowingItemsActivity extends FullscreenActivity implements OnItemCl
     public void onItemClicked(String itemName) {
 
     }
+
+    @Override
+    public void onItemLongClicked(String itemName) {
+
+    }
 }
