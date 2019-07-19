@@ -1,9 +1,12 @@
 package com.findthespy.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,13 +20,11 @@ import java.util.ArrayList;
 
 public class CategoryActivity extends FullscreenActivity implements OnItemClickListener {
 
-    private RecyclerView recyclerView;
     private CategoryRecyclerViewAdapter mAdapter;
-    private LinearLayoutManager linearLayoutManager;
-    private GridLayoutManager gridLayoutManager;
     private ArrayList<String> items = new ArrayList<>();
     private InputMethodManager imm;
-
+    private TinyDB db;
+    private String categoryName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +34,13 @@ public class CategoryActivity extends FullscreenActivity implements OnItemClickL
         final EditText nameEditText = findViewById(R.id.category_name);
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        final String categoryName = "category#" + getIntent().getExtras().getString("categoryName");
+        categoryName = "category#" + getIntent().getExtras().getString("categoryName");
 
-        final TinyDB db = new TinyDB(getApplicationContext());
+        db = new TinyDB(getApplicationContext());
         items = db.getListString(categoryName);
-        recyclerView = findViewById(R.id.grid);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView recyclerView = findViewById(R.id.grid);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 gridLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -47,8 +48,10 @@ public class CategoryActivity extends FullscreenActivity implements OnItemClickL
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-        findViewById(R.id.add_category).setOnClickListener(new View.OnClickListener() {
+        nameEditText.setHint("Add New Item...");
+        Button addButton = findViewById(R.id.add_btn);
+        addButton.setText("Add Item");
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String input = nameEditText.getText().toString();
@@ -68,6 +71,7 @@ public class CategoryActivity extends FullscreenActivity implements OnItemClickL
         });
 
     }
+
     private void closeKeyBoard() {
         if (imm != null)
             imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -77,6 +81,26 @@ public class CategoryActivity extends FullscreenActivity implements OnItemClickL
     @Override
     public void onItemClicked(String category) {
         Toast.makeText(getApplicationContext(), category, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemLongClicked(final String itemName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete " + itemName + "?")
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        items.remove(itemName);
+                        db.putListString(categoryName, items);
+                        mAdapter.notifyDataSetChanged();
+                        hide();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        hide();
+                    }
+                });
+        builder.create().show();
     }
 }
 

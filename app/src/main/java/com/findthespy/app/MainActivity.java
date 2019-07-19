@@ -51,6 +51,13 @@ public class MainActivity extends FullscreenActivity {
     private void initializeCategoryChoose() {
         TinyDB db = new TinyDB(getApplicationContext());
         final ArrayList<String> categories = db.getListString("categories");
+        final ArrayList<String> categoriesToRemove = new ArrayList<>();
+        for (String category : categories) {
+            if (db.getListString("category#" + category) == null || db.getListString("category#" + category).isEmpty()) {
+                categoriesToRemove.add(category);
+            }
+        }
+        categories.removeAll(categoriesToRemove);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 R.layout.spinner_dropdown_item, categories);
@@ -61,11 +68,12 @@ public class MainActivity extends FullscreenActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 chosenCategory = categories.get(position);
+                hide();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                hide();
             }
         });
     }

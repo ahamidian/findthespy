@@ -1,10 +1,13 @@
 package com.findthespy.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,13 +20,10 @@ import java.util.ArrayList;
 
 public class CategoriesListActivity extends FullscreenActivity implements OnItemClickListener {
 
-    private RecyclerView recyclerView;
     private CategoryRecyclerViewAdapter mAdapter;
-    private LinearLayoutManager linearLayoutManager;
-    private GridLayoutManager gridLayoutManager;
     private ArrayList<String> categories = new ArrayList<>();
     private InputMethodManager imm;
-
+    private TinyDB db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +35,11 @@ public class CategoriesListActivity extends FullscreenActivity implements OnItem
         imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
 
 
-        final TinyDB db = new TinyDB(getApplicationContext());
+        db = new TinyDB(getApplicationContext());
         categories = db.getListString("categories");
-        recyclerView = findViewById(R.id.grid);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView recyclerView = findViewById(R.id.grid);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 gridLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -48,7 +48,8 @@ public class CategoriesListActivity extends FullscreenActivity implements OnItem
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        findViewById(R.id.add_category).setOnClickListener(new View.OnClickListener() {
+        Button addButton = findViewById(R.id.add_btn);
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String input = nameEditText.getText().toString();
@@ -79,6 +80,27 @@ public class CategoriesListActivity extends FullscreenActivity implements OnItem
         Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
         intent.putExtra("categoryName", categoryName);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongClicked(final String itemName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete "+itemName+"?")
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        categories.remove(itemName);
+                        db.putListString("categories", categories);
+                        db.putListString("category#"+itemName, new ArrayList<String>());
+                        mAdapter.notifyDataSetChanged();
+                        hide();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        hide();
+                    }
+                });
+        builder.create().show();
     }
 }
 

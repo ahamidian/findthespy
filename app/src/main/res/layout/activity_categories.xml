@@ -26,7 +26,7 @@
             android:hint="Add New Category..."/>
         <Button
             android:layout_width="0px"
-            android:id="@+id/add_category"
+            android:id="@+id/add_btn"
             android:layout_height="match_parent"
             android:layout_weight=".2"
             android:text="add category" />
