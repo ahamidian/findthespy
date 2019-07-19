@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriesActivity">
+    android:id="@+id/fullscreen_content"
+    tools:context=".CategoriesListActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -17,7 +18,7 @@
             android:layout_height="match_parent"
             android:inputType="textShortMessage"
             android:maxLines="1"
-            android:keyboardNavigationCluster="false"
+            android:imeOptions="flagNoExtractUi"
             android:hint="Add New Category..."/>
         <Button
             android:layout_width="0px"
