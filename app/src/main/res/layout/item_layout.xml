@@ -17,6 +17,7 @@
             android:focusable="false"
             android:textStyle="bold"
             android:text="title"
+            android:textColor="@color/colorAccent"
             android:textSize="23sp"/>
     </LinearLayout>
 

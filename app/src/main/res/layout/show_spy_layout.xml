@@ -16,8 +16,8 @@
             android:id="@+id/spy"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="150dp"
             android:layout_marginTop="110dp"
+            android:layout_marginStart="150dp"
             android:text="@string/spy"
             android:textColor="@color/colorAccent"
             android:textSize="40sp" />

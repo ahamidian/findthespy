@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -50,12 +51,19 @@ public class CategoriesListActivity extends FullscreenActivity implements OnItem
         findViewById(R.id.add_category).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categories.add(nameEditText.getText().toString());
-                db.putListString("categories", categories);
-                nameEditText.setText("");
-                nameEditText.clearFocus();
-                closeKeyBoard();
-                mAdapter.notifyDataSetChanged();
+                String input = nameEditText.getText().toString();
+                if (categories.contains(input)) {
+                    Toast.makeText(getApplicationContext(), "Category name can not be duplicated!", Toast.LENGTH_LONG).show();
+                } else if (input.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Category name can not be empty!", Toast.LENGTH_LONG).show();
+                } else {
+                    categories.add(input);
+                    db.putListString("categories", categories);
+                    nameEditText.setText("");
+                    nameEditText.clearFocus();
+                    closeKeyBoard();
+                    mAdapter.notifyDataSetChanged();
+                }
             }
         });
 
