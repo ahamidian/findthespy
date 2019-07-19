@@ -19,5 +19,6 @@
     <string name="spy">Spy:</string>
     <string name="player">Player </string>
     <string name="view_item_list">View Item List</string>
+    <string name="view_answer">View Answer</string>
 
 </resources>
