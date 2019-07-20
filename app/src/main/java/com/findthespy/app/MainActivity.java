@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,9 @@ public class MainActivity extends FullscreenActivity {
         setContentView(R.layout.activity_fullscreen);
 
         super.mContentView = findViewById(R.id.fullscreen_content);
+
+        initilizeWholeScreen();
+
         createDefaultCategory();
         initializePeopleSlider();
         initializeTimeSlider();
@@ -46,6 +50,16 @@ public class MainActivity extends FullscreenActivity {
         setTime(3);
         setNumberOfPeople(5);
 
+    }
+
+    private void initilizeWholeScreen() {
+        FrameLayout whole = findViewById(R.id.whole_screen);
+        whole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide();
+            }
+        });
     }
 
     private void initializeCategoryChoose() {
@@ -67,6 +81,7 @@ public class MainActivity extends FullscreenActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                hide();
                 chosenCategory = categories.get(position);
                 hide();
             }
